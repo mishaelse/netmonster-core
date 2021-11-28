@@ -1,6 +1,7 @@
 package cz.mroczis.netmonster.core.feature.config
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.telephony.CellLocation
 import android.telephony.PhoneStateListener
 import android.telephony.ServiceState
@@ -42,6 +43,7 @@ class CellLocationSource {
     /**
      * Kotlin friendly PhoneStateListener that grabs [CellLocation]
      */
+    @SuppressLint("MissingPermission")
     private class CellLocationListener(
         subId: Int?,
         private val simStateListener: CellLocationListener.(state: CellLocation) -> Unit

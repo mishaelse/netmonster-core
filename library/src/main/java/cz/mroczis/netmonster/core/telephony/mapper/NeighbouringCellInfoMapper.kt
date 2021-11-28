@@ -1,5 +1,6 @@
 package cz.mroczis.netmonster.core.telephony.mapper
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.telephony.NeighboringCellInfo
 import android.telephony.TelephonyManager
@@ -34,6 +35,7 @@ class NeighbouringCellInfoMapper(
     private val subId: Int
 ) : ICellMapper<List<NeighboringCellInfo>?> {
 
+    @SuppressLint("MissingPermission")
     override fun map(model: List<NeighboringCellInfo>?): List<ICell> {
         val plmn = Network.map(telephony.networkOperator)
         return model?.mapNotNull {
