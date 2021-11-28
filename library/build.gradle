@@ -2,6 +2,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'maven-publish'
 
+group = "com.github.mishaelse"
+
 android {
     compileSdkVersion 30
 
@@ -42,5 +44,18 @@ dependencies {
 
     androidTestImplementation 'androidx.test:runner:1.3.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+}
 
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.github.mishaelse'
+                artifactId = 'netmonster-core'
+                version = '1.0'
+            }
+        }
+    }
 }
