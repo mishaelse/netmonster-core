@@ -42,7 +42,7 @@ data class CellNr(
     override val connectionStatus: IConnection,
     override val subscriptionId: Int,
     override val timestamp: Milliseconds?,
-    val cellInfo: CellInfoNr?
+    override val cellInfo: CellInfoNr?
 ) : ICell {
 
     override fun <T> let(processor: ICellProcessor<T>): T = processor.processNr(this)

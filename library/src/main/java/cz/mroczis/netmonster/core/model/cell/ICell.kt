@@ -1,6 +1,7 @@
 package cz.mroczis.netmonster.core.model.cell
 
 import android.os.Build
+import android.telephony.CellInfo
 import cz.mroczis.netmonster.core.Milliseconds
 import cz.mroczis.netmonster.core.model.Network
 import cz.mroczis.netmonster.core.model.annotation.SinceSdk
@@ -43,6 +44,12 @@ interface ICell {
      * Unit: milliseconds since device boot
      */
     val timestamp: Milliseconds?
+
+    /**
+     * The underlying telephony model CellInfo
+     * Only set when CellSource.ALL_CELL_INFO (i.e. Telephony.getAllCellInfo) is used
+     */
+    val cellInfo: CellInfo?
 
     /**
      * Using visitor pattern invokes one method of [processor]

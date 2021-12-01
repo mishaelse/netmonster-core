@@ -41,7 +41,7 @@ data class CellWcdma(
     override val connectionStatus: IConnection,
     override val subscriptionId: Int,
     override val timestamp: Milliseconds?,
-    val cellInfo: CellInfoWcdma?
+    override val cellInfo: CellInfoWcdma?
 ) : ICell {
 
     /**

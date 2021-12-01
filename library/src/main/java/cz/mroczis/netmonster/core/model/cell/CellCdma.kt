@@ -53,7 +53,7 @@ data class CellCdma(
     override val connectionStatus: IConnection,
     override val subscriptionId: Int,
     override val timestamp: Milliseconds?,
-    val cellInfo: CellInfoCdma?
+    override val cellInfo: CellInfoCdma?
 ) : ICell {
 
     /**

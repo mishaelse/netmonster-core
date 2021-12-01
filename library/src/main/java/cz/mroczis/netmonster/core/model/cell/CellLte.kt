@@ -48,7 +48,7 @@ data class CellLte(
     override val connectionStatus: IConnection,
     override val subscriptionId: Int,
     override val timestamp: Milliseconds?,
-    val cellInfo: CellInfoLte?
+    override val cellInfo: CellInfoLte?
 ) : ICell {
 
     /**
