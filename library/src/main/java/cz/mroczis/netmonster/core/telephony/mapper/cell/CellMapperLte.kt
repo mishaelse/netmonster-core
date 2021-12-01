@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.os.Build
 import android.telephony.CellIdentityLte
+import android.telephony.CellInfoLte
 import android.telephony.CellSignalStrengthLte
 import android.telephony.SignalStrength
 import android.telephony.gsm.GsmCellLocation
@@ -23,7 +24,7 @@ import kotlin.math.absoluteValue
  * [CellIdentityLte] -> [CellLte]
  */
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-internal fun CellIdentityLte.mapCell(subId: Int, connection: IConnection, signal: SignalLte, timestamp: Long?): CellLte? {
+internal fun CellIdentityLte.mapCell(subId: Int, connection: IConnection, signal: SignalLte, timestamp: Long?, cellInfo : CellInfoLte): CellLte? {
     val network = mapNetwork()
     val ci = ci.inRangeOrNull(CellLte.CID_RANGE)
     val tac = tac.inRangeOrNull(CellLte.TAC_RANGE)
@@ -51,7 +52,8 @@ internal fun CellIdentityLte.mapCell(subId: Int, connection: IConnection, signal
         signal = signal,
         band = band,
         subscriptionId = subId,
-        timestamp = timestamp
+        timestamp = timestamp,
+        cellInfo = cellInfo
     )
 }
 
@@ -238,6 +240,7 @@ internal fun GsmCellLocation.mapLte(subId: Int, signalStrength: SignalStrength?,
             connectionStatus = PrimaryConnection(),
             subscriptionId = subId,
             timestamp = null,
+            cellInfo = null
         )
     } else null
 }

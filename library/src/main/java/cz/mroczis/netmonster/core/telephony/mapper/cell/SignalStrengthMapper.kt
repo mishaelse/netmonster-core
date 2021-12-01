@@ -33,7 +33,8 @@ fun SignalStrength.toCells(subscriptionId: Int): List<CellNr> =
                 signal = mappedSignal,
                 connectionStatus = SecondaryConnection(isGuess = false),
                 subscriptionId = subscriptionId,
-                timestamp = timestamp
+                timestamp = timestamp,
+                cellInfo = null
             )
 
             listOf(cell)

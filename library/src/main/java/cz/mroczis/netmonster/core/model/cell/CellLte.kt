@@ -1,6 +1,7 @@
 package cz.mroczis.netmonster.core.model.cell
 
 import android.os.Build
+import android.telephony.CellInfoLte
 import androidx.annotation.IntRange
 import cz.mroczis.netmonster.core.Milliseconds
 import cz.mroczis.netmonster.core.model.Network
@@ -47,6 +48,7 @@ data class CellLte(
     override val connectionStatus: IConnection,
     override val subscriptionId: Int,
     override val timestamp: Milliseconds?,
+    val cellInfo: CellInfoLte?
 ) : ICell {
 
     /**

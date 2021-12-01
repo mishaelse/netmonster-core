@@ -2,10 +2,7 @@ package cz.mroczis.netmonster.core.telephony.mapper.cell
 
 import android.annotation.TargetApi
 import android.os.Build
-import android.telephony.CellIdentityGsm
-import android.telephony.CellSignalStrengthGsm
-import android.telephony.CellSignalStrengthWcdma
-import android.telephony.SignalStrength
+import android.telephony.*
 import android.telephony.gsm.GsmCellLocation
 import cz.mroczis.netmonster.core.db.BandTableGsm
 import cz.mroczis.netmonster.core.model.Network
@@ -75,7 +72,8 @@ internal fun CellIdentityGsm.mapCell(
     subId: Int,
     connection: IConnection,
     signal: SignalGsm,
-    timestamp: Long
+    timestamp: Long,
+    cellInfo : CellInfoGsm
 ): CellGsm? {
     val network = mapNetwork()
     val cid = cid.inRangeOrNull(CellGsm.CID_RANGE)
@@ -112,6 +110,7 @@ internal fun CellIdentityGsm.mapCell(
             band = band,
             subscriptionId = subId,
             timestamp = timestamp,
+            cellInfo = cellInfo
         )
     } else null
 }
@@ -175,6 +174,7 @@ internal fun GsmCellLocation.mapGsm(
             connectionStatus = PrimaryConnection(),
             subscriptionId = subId,
             timestamp = null,
+            cellInfo = null
         )
     } else null
 }

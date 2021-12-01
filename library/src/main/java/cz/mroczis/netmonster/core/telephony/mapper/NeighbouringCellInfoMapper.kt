@@ -66,7 +66,8 @@ class NeighbouringCellInfoMapper(
                 signal = SignalGsm(rssi, null, null),
                 connectionStatus = NoneConnection(),
                 subscriptionId = subId,
-                timestamp = null
+                timestamp = null,
+                cellInfo = null
             )
         } else null
     }
@@ -85,7 +86,8 @@ class NeighbouringCellInfoMapper(
                 signal = SignalWcdma(rssi, null, null, null, null),
                 connectionStatus = NoneConnection(),
                 subscriptionId = subId,
-                timestamp = null
+                timestamp = null,
+                cellInfo = null
             )
         } else null
     }

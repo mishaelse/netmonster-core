@@ -3,6 +3,7 @@ package cz.mroczis.netmonster.core.telephony.mapper.cell
 import android.annotation.TargetApi
 import android.os.Build
 import android.telephony.CellIdentityNr
+import android.telephony.CellInfoNr
 import android.telephony.CellSignalStrengthNr
 import cz.mroczis.netmonster.core.db.BandTableNr
 import cz.mroczis.netmonster.core.model.Network
@@ -17,7 +18,7 @@ import java.sql.Timestamp
  * [CellIdentityNr] -> [CellNr]
  */
 @TargetApi(Build.VERSION_CODES.Q)
-internal fun CellIdentityNr.mapCell(subId: Int, connection: IConnection, signal: SignalNr?, timestamp: Long): CellNr? {
+internal fun CellIdentityNr.mapCell(subId: Int, connection: IConnection, signal: SignalNr?, timestamp: Long, cellInfo : CellInfoNr): CellNr? {
     val network = Network.map(mccString, mncString)
     val nci = nci.inRangeOrNull(CellNr.CID_RANGE)
     val tac = tac.inRangeOrNull(CellNr.TAC_RANGE)
@@ -40,7 +41,8 @@ internal fun CellIdentityNr.mapCell(subId: Int, connection: IConnection, signal:
         signal = signal ?: SignalNr(),
         band = band,
         subscriptionId = subId,
-        timestamp = timestamp
+        timestamp = timestamp,
+        cellInfo = cellInfo
     )
 }
 

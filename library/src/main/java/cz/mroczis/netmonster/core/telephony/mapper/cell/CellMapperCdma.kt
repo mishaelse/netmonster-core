@@ -3,6 +3,7 @@ package cz.mroczis.netmonster.core.telephony.mapper.cell
 import android.annotation.TargetApi
 import android.os.Build
 import android.telephony.CellIdentityCdma
+import android.telephony.CellInfoCdma
 import android.telephony.CellSignalStrengthCdma
 import android.telephony.SignalStrength
 import android.telephony.cdma.CdmaCellLocation
@@ -38,7 +39,7 @@ internal fun CellSignalStrengthCdma.mapSignal(): SignalCdma {
  * [CellIdentityCdma] -> [CellCdma]
  */
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-internal fun CellIdentityCdma.mapCell(subId: Int, connection: IConnection, signal: SignalCdma, timestamp: Long): CellCdma? {
+internal fun CellIdentityCdma.mapCell(subId: Int, connection: IConnection, signal: SignalCdma, timestamp: Long, cellInfo : CellInfoCdma): CellCdma? {
     val bid = basestationId.inRangeOrNull(CellCdma.BID_RANGE)
     val nid = networkId.inRangeOrNull(CellCdma.NID_RANGE)
     val sid = systemId.inRangeOrNull(CellCdma.SID_RANGE)
@@ -55,7 +56,8 @@ internal fun CellIdentityCdma.mapCell(subId: Int, connection: IConnection, signa
             signal = signal,
             connectionStatus = connection,
             subscriptionId = subId,
-            timestamp = timestamp
+            timestamp = timestamp,
+            cellInfo = cellInfo
         )
     } else null
 }
@@ -92,6 +94,7 @@ internal fun CdmaCellLocation.mapCdma(subId: Int, signal: SignalStrength?): ICel
             connectionStatus = PrimaryConnection(),
             subscriptionId = subId,
             timestamp = null,
+            cellInfo = null
         )
     } else null
 }

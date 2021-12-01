@@ -1,5 +1,6 @@
 package cz.mroczis.netmonster.core.model.cell
 
+import android.telephony.CellInfoCdma
 import androidx.annotation.IntRange
 import cz.mroczis.netmonster.core.Milliseconds
 import cz.mroczis.netmonster.core.model.Network
@@ -52,6 +53,7 @@ data class CellCdma(
     override val connectionStatus: IConnection,
     override val subscriptionId: Int,
     override val timestamp: Milliseconds?,
+    val cellInfo: CellInfoCdma?
 ) : ICell {
 
     /**

@@ -1,6 +1,7 @@
 package cz.mroczis.netmonster.core.model.cell
 
 import android.os.Build
+import android.telephony.CellInfoNr
 import cz.mroczis.netmonster.core.Milliseconds
 import cz.mroczis.netmonster.core.model.Network
 import cz.mroczis.netmonster.core.model.annotation.SinceSdk
@@ -41,6 +42,7 @@ data class CellNr(
     override val connectionStatus: IConnection,
     override val subscriptionId: Int,
     override val timestamp: Milliseconds?,
+    val cellInfo: CellInfoNr?
 ) : ICell {
 
     override fun <T> let(processor: ICellProcessor<T>): T = processor.processNr(this)

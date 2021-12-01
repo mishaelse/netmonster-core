@@ -2,10 +2,7 @@ package cz.mroczis.netmonster.core.telephony.mapper.cell
 
 import android.annotation.TargetApi
 import android.os.Build
-import android.telephony.CellIdentityWcdma
-import android.telephony.CellSignalStrengthGsm
-import android.telephony.CellSignalStrengthWcdma
-import android.telephony.SignalStrength
+import android.telephony.*
 import android.telephony.gsm.GsmCellLocation
 import cz.mroczis.netmonster.core.db.BandTableWcdma
 import cz.mroczis.netmonster.core.model.Network
@@ -79,7 +76,7 @@ internal fun CellSignalStrengthWcdma.mapSignal(): SignalWcdma {
  * [CellIdentityWcdma] -> [CellWcdma]
  */
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-internal fun CellIdentityWcdma.mapCell(subId: Int, connection: IConnection, signal: SignalWcdma, timestamp: Long): CellWcdma? {
+internal fun CellIdentityWcdma.mapCell(subId: Int, connection: IConnection, signal: SignalWcdma, timestamp: Long, cellInfo : CellInfoWcdma): CellWcdma? {
     val network = mapNetwork()
     val lac = lac.inRangeOrNull(CellWcdma.LAC_RANGE)
     val ci = if (lac == null && cid < 100) {
@@ -112,7 +109,8 @@ internal fun CellIdentityWcdma.mapCell(subId: Int, connection: IConnection, sign
             signal = signal,
             band = band,
             subscriptionId = subId,
-            timestamp = timestamp
+            timestamp = timestamp,
+            cellInfo = cellInfo
         )
     }
 }
@@ -167,6 +165,7 @@ internal fun GsmCellLocation.mapWcdma(subId: Int, signalStrength: SignalStrength
             connectionStatus = PrimaryConnection(),
             subscriptionId = subId,
             timestamp = null,
+            cellInfo = null,
         )
     } else null
 }
